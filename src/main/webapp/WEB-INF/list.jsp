@@ -9,8 +9,8 @@
         <title>List</title>
     </head>
     <body>
-        <h1>Registros</h1>
-        <a href="/insert">Novo Registro</a>
+        <h1>Registros de Gêneros</h1>
+        <a href="/generos/insert">Novo Registro</a>
         <ul>
             <c:forEach var="item" items="${registros}">
                 <li>${item.nome}</li> | 

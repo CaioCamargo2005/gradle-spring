@@ -11,7 +11,7 @@
         <h1>Novo Registro</h1>
         <form action="/insert" method="post">
             <label>Descrição</label>
-            <input type ="text" name="descricao" />
+            <input type ="text" name="nome" />
             <button type="submit">Salvar</button>
         </form>
     </body>

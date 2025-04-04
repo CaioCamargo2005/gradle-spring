@@ -2,8 +2,6 @@ package application.controller;
 
 import java.util.Optional;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
@@ -15,13 +13,17 @@ import application.model.Genero;
 import application.repository.GeneroRepository;
 
 
-
 @Controller
+@RequestMapping(value = "/generos")
 public class IndexController {
     @Autowired
     private GeneroRepository database;
 
-    @RequestMapping(value = "/")
+    public String list(Model ui) {
+        ui.addAttribute("generos", database.findAll());
+        return "/generos/list";
+    }
+
     public String home() {
         return "list";
     }
@@ -34,19 +36,20 @@ public class IndexController {
 
     @RequestMapping("/insert")
     public String insert(){
-        return "formInsert";
+        return "/generos/list";
     }
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public String insert(@RequestParam("descricao") String descricao) {
+    public String insert(@RequestParam("nome") String nome) {
         Genero data = new Genero();
-        data.setNome(descricao);
+        data.setNome(nome);
 
         database.save(data);
 
-        return "redirect:/list";
+        return "redirect:/generos/list";
     }
 
+    
     @RequestMapping("/update")
     public String update(@RequestParam("id") long id, Model ui){
         Optional<Genero> resultado = database.findById(id);
